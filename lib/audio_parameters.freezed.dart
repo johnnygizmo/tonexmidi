@@ -55,6 +55,7 @@ mixin _$AudioParameters {
   int get mic2X113 => throw _privateConstructorUsedError;
   int get mic2Z114 => throw _privateConstructorUsedError;
   int get micsMix115 => throw _privateConstructorUsedError;
+  int get gain102 => throw _privateConstructorUsedError;
 
   /// Serializes this AudioParameters to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -107,7 +108,8 @@ abstract class $AudioParametersCopyWith<$Res> {
       int mic2_112,
       int mic2X113,
       int mic2Z114,
-      int micsMix115});
+      int micsMix115,
+      int gain102});
 }
 
 /// @nodoc
@@ -160,6 +162,7 @@ class _$AudioParametersCopyWithImpl<$Res, $Val extends AudioParameters>
     Object? mic2X113 = null,
     Object? mic2Z114 = null,
     Object? micsMix115 = null,
+    Object? gain102 = null,
   }) {
     return _then(_value.copyWith(
       reverb79: null == reverb79
@@ -302,6 +305,10 @@ class _$AudioParametersCopyWithImpl<$Res, $Val extends AudioParameters>
           ? _value.micsMix115
           : micsMix115 // ignore: cast_nullable_to_non_nullable
               as int,
+      gain102: null == gain102
+          ? _value.gain102
+          : gain102 // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -349,7 +356,8 @@ abstract class _$$AudioParametersImplCopyWith<$Res>
       int mic2_112,
       int mic2X113,
       int mic2Z114,
-      int micsMix115});
+      int micsMix115,
+      int gain102});
 }
 
 /// @nodoc
@@ -400,6 +408,7 @@ class __$$AudioParametersImplCopyWithImpl<$Res>
     Object? mic2X113 = null,
     Object? mic2Z114 = null,
     Object? micsMix115 = null,
+    Object? gain102 = null,
   }) {
     return _then(_$AudioParametersImpl(
       reverb79: null == reverb79
@@ -542,6 +551,10 @@ class __$$AudioParametersImplCopyWithImpl<$Res>
           ? _value.micsMix115
           : micsMix115 // ignore: cast_nullable_to_non_nullable
               as int,
+      gain102: null == gain102
+          ? _value.gain102
+          : gain102 // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -553,30 +566,30 @@ class _$AudioParametersImpl implements _AudioParameters {
       {this.reverb79 = 0,
       this.compressor19 = 0,
       this.noiseGate15 = 0,
-      this.presence106 = 0,
-      this.depth107 = 0,
+      this.presence106 = 64,
+      this.depth107 = 64,
       this.modelVol103 = 0,
       this.noiseGt14 = 0,
       this.ngRel16 = 0,
-      this.ngDpth17 = 0,
+      this.ngDpth17 = 64,
       this.comp18 = 0,
-      this.cmpGain20 = 0,
-      this.cmpAtk21 = 0,
-      this.cmpPatc22 = 0,
-      this.bass23 = 0,
-      this.bassFrq24 = 0,
-      this.mid25 = 0,
-      this.midQ26 = 0,
-      this.midFrq27 = 0,
-      this.treble28 = 0,
-      this.trblFrq29 = 0,
+      this.cmpGain20 = 80,
+      this.cmpAtk21 = 20,
+      this.cmpPatc22 = 127,
+      this.bass23 = 64,
+      this.bassFrq24 = 70,
+      this.mid25 = 64,
+      this.midQ26 = 64,
+      this.midFrq27 = 64,
+      this.treble28 = 64,
+      this.trblFrq29 = 64,
       this.eqPatch30 = 0,
-      this.mix104 = 0,
+      this.mix104 = 127,
       this.reverb75 = 0,
       this.revType85 = 0,
-      this.time76 = 0,
+      this.time76 = 64,
       this.predelay77 = 0,
-      this.color78 = 0,
+      this.color78 = 64,
       this.reso108 = 0,
       this.mic1_109 = 0,
       this.mic1X110 = 0,
@@ -584,7 +597,8 @@ class _$AudioParametersImpl implements _AudioParameters {
       this.mic2_112 = 0,
       this.mic2X113 = 0,
       this.mic2Z114 = 0,
-      this.micsMix115 = 0});
+      this.micsMix115 = 0,
+      this.gain102 = 64});
 
   factory _$AudioParametersImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioParametersImplFromJson(json);
@@ -694,10 +708,13 @@ class _$AudioParametersImpl implements _AudioParameters {
   @override
   @JsonKey()
   final int micsMix115;
+  @override
+  @JsonKey()
+  final int gain102;
 
   @override
   String toString() {
-    return 'AudioParameters(reverb79: $reverb79, compressor19: $compressor19, noiseGate15: $noiseGate15, presence106: $presence106, depth107: $depth107, modelVol103: $modelVol103, noiseGt14: $noiseGt14, ngRel16: $ngRel16, ngDpth17: $ngDpth17, comp18: $comp18, cmpGain20: $cmpGain20, cmpAtk21: $cmpAtk21, cmpPatc22: $cmpPatc22, bass23: $bass23, bassFrq24: $bassFrq24, mid25: $mid25, midQ26: $midQ26, midFrq27: $midFrq27, treble28: $treble28, trblFrq29: $trblFrq29, eqPatch30: $eqPatch30, mix104: $mix104, reverb75: $reverb75, revType85: $revType85, time76: $time76, predelay77: $predelay77, color78: $color78, reso108: $reso108, mic1_109: $mic1_109, mic1X110: $mic1X110, mic1Z111: $mic1Z111, mic2_112: $mic2_112, mic2X113: $mic2X113, mic2Z114: $mic2Z114, micsMix115: $micsMix115)';
+    return 'AudioParameters(reverb79: $reverb79, compressor19: $compressor19, noiseGate15: $noiseGate15, presence106: $presence106, depth107: $depth107, modelVol103: $modelVol103, noiseGt14: $noiseGt14, ngRel16: $ngRel16, ngDpth17: $ngDpth17, comp18: $comp18, cmpGain20: $cmpGain20, cmpAtk21: $cmpAtk21, cmpPatc22: $cmpPatc22, bass23: $bass23, bassFrq24: $bassFrq24, mid25: $mid25, midQ26: $midQ26, midFrq27: $midFrq27, treble28: $treble28, trblFrq29: $trblFrq29, eqPatch30: $eqPatch30, mix104: $mix104, reverb75: $reverb75, revType85: $revType85, time76: $time76, predelay77: $predelay77, color78: $color78, reso108: $reso108, mic1_109: $mic1_109, mic1X110: $mic1X110, mic1Z111: $mic1Z111, mic2_112: $mic2_112, mic2X113: $mic2X113, mic2Z114: $mic2Z114, micsMix115: $micsMix115, gain102: $gain102)';
   }
 
   @override
@@ -765,7 +782,8 @@ class _$AudioParametersImpl implements _AudioParameters {
             (identical(other.mic2Z114, mic2Z114) ||
                 other.mic2Z114 == mic2Z114) &&
             (identical(other.micsMix115, micsMix115) ||
-                other.micsMix115 == micsMix115));
+                other.micsMix115 == micsMix115) &&
+            (identical(other.gain102, gain102) || other.gain102 == gain102));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -806,7 +824,8 @@ class _$AudioParametersImpl implements _AudioParameters {
         mic2_112,
         mic2X113,
         mic2Z114,
-        micsMix115
+        micsMix115,
+        gain102
       ]);
 
   /// Create a copy of AudioParameters
@@ -862,7 +881,8 @@ abstract class _AudioParameters implements AudioParameters {
       final int mic2_112,
       final int mic2X113,
       final int mic2Z114,
-      final int micsMix115}) = _$AudioParametersImpl;
+      final int micsMix115,
+      final int gain102}) = _$AudioParametersImpl;
 
   factory _AudioParameters.fromJson(Map<String, dynamic> json) =
       _$AudioParametersImpl.fromJson;
@@ -937,6 +957,8 @@ abstract class _AudioParameters implements AudioParameters {
   int get mic2Z114;
   @override
   int get micsMix115;
+  @override
+  int get gain102;
 
   /// Create a copy of AudioParameters
   /// with the given fields replaced by the non-null parameter values.

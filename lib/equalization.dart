@@ -36,6 +36,29 @@ class Equalization extends ConsumerWidget {
                     Column(
                       children: [
                         MidiSlider(
+                          ccMsg: 102,
+                          midi: midi,
+                          label: const Text("Gain"),
+                          valueSetter: (value) {
+                            ref.read(audioParametersProvider.notifier).state =
+                                ref
+                                    .read(audioParametersProvider.notifier)
+                                    .state
+                                    .copyWith(gain102: value);
+                          },
+                          valueGetter: () {
+                            return ref
+                                .read(audioParametersProvider.notifier)
+                                .state
+                                .gain102;
+                          },
+                        ),
+                      ],
+                    ),
+                    VerticalDivider(),
+                    Column(
+                      children: [
+                        MidiSlider(
                           ccMsg: 23,
                           midi: midi,
                           label: const Text("Bass"),
