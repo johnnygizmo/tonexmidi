@@ -20,7 +20,7 @@ class Equalization extends ConsumerWidget {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         height: 370,
-        width: 400,
+        width: 550,
         child: Container(
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 216, 249, 154),
@@ -185,6 +185,73 @@ class Equalization extends ConsumerWidget {
                             ),
                           ],
                         )
+                      ],
+                    ),
+                    VerticalDivider(),
+                    Column(
+                      children: [
+                        MidiSlider(
+                          ccMsg: 107,
+                          midi: midi,
+                          label: const Text("Depth"),
+                          valueSetter: (value) {
+                            ref.read(audioParametersProvider.notifier).state =
+                                ref
+                                    .read(audioParametersProvider.notifier)
+                                    .state
+                                    .copyWith(depth107: value);
+                          },
+                          valueGetter: () {
+                            return ref
+                                .read(audioParametersProvider.notifier)
+                                .state
+                                .depth107;
+                          },
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        MidiSlider(
+                          ccMsg: 106,
+                          midi: midi,
+                          label: const Text("Presence"),
+                          valueSetter: (value) {
+                            ref.read(audioParametersProvider.notifier).state =
+                                ref
+                                    .read(audioParametersProvider.notifier)
+                                    .state
+                                    .copyWith(presence106: value);
+                          },
+                          valueGetter: () {
+                            return ref
+                                .read(audioParametersProvider.notifier)
+                                .state
+                                .presence106;
+                          },
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        MidiSlider(
+                          ccMsg: 104,
+                          midi: midi,
+                          label: const Text("Mix"),
+                          valueSetter: (value) {
+                            ref.read(audioParametersProvider.notifier).state =
+                                ref
+                                    .read(audioParametersProvider.notifier)
+                                    .state
+                                    .copyWith(mix104: value);
+                          },
+                          valueGetter: () {
+                            return ref
+                                .read(audioParametersProvider.notifier)
+                                .state
+                                .mix104;
+                          },
+                        ),
                       ],
                     ),
                   ],

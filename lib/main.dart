@@ -6,6 +6,7 @@ import 'package:tonexmidi/equalization.dart';
 import 'package:tonexmidi/midi.dart';
 import 'package:tonexmidi/midi_knob.dart';
 import 'package:tonexmidi/midi_slider.dart';
+import 'package:tonexmidi/noise_gate.dart';
 import 'package:tonexmidi/reverb.dart';
 
 void main() {
@@ -182,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Row(
                     children: [
+                      NoiseGate(knobStyle: style),
                       Compressor(
                         knobStyle: style,
                       ),
