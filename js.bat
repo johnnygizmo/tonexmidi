@@ -1,0 +1,1 @@
+copy .\assets\js\main.js .\build\flutter_assets\assets\js
