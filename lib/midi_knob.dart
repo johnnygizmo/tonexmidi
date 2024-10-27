@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knob_widget/knob_widget.dart';
 import 'package:tonexmidi/audio_parameters_provider.dart';
 import 'package:tonexmidi/main.dart';
-import 'package:tonexmidi/midi.dart';
-import 'package:riverpod/riverpod.dart';
 
 class MidiKnob extends ConsumerStatefulWidget {
   const MidiKnob({

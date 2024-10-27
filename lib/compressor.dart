@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knob_widget/knob_widget.dart';
 import 'package:tonexmidi/audio_parameters_provider.dart';
 import 'package:tonexmidi/main.dart';
-import 'package:tonexmidi/midi.dart';
 import 'package:tonexmidi/midi_knob.dart';
 
 class Compressor extends ConsumerStatefulWidget {
@@ -21,11 +20,12 @@ class Compressor extends ConsumerStatefulWidget {
 class _CompressorState extends ConsumerState<Compressor> {
   @override
   Widget build(BuildContext context) {
-    var values = ref.watch(audioParametersProvider);
+    ref.watch(audioParametersProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 300,
+        height: 175,
+        width: 300,
         child: Container(
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 253, 135, 135),
@@ -40,13 +40,16 @@ class _CompressorState extends ConsumerState<Compressor> {
                 Row(
                   children: [
                     Switch(
-                        value: values.comp18 > 0,
+                        value: ref
+                                .read(audioParametersProvider.notifier)
+                                .get("comp18")
+                                .value >
+                            0,
                         onChanged: (value) {
                           midi.midiCC(18, (value ? 1 : 0) * 127);
-                          ref.read(audioParametersProvider.notifier).state = ref
+                          ref
                               .read(audioParametersProvider.notifier)
-                              .state
-                              .copyWith(comp18: (value ? 1 : 0) * 127);
+                              .set("comp18", (value ? 1 : 0) * 127);
                         }),
                     SegmentedButton<int>(
                       style: TextButton.styleFrom(
@@ -67,13 +70,17 @@ class _CompressorState extends ConsumerState<Compressor> {
                           label: Text('Post'),
                         ),
                       ],
-                      selected: {values.cmpPatc22},
+                      selected: {
+                        ref
+                            .read(audioParametersProvider.notifier)
+                            .get("cmpPatc22")
+                            .value
+                      },
                       onSelectionChanged: (Set<int> newSelection) {
                         midi.midiCC(22, newSelection.first);
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(cmpPatc22: newSelection.first);
+                            .set("cmpPatc22", newSelection.first);
                       },
                     )
                   ],
@@ -90,10 +97,9 @@ class _CompressorState extends ConsumerState<Compressor> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(compressor19: value);
+                            .set("compressor19", value);
                       },
                     ),
                     MidiKnob(
@@ -106,10 +112,9 @@ class _CompressorState extends ConsumerState<Compressor> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(cmpGain20: value);
+                            .set("cmpGain20", value);
                       },
                     ),
                     MidiKnob(
@@ -122,10 +127,9 @@ class _CompressorState extends ConsumerState<Compressor> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(cmpAtk21: value);
+                            .set("cmpAtk21", value);
                       },
                     ),
                   ],

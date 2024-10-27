@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knob_widget/knob_widget.dart';
 import 'package:tonexmidi/audio_parameters_provider.dart';
 import 'package:tonexmidi/main.dart';
-import 'package:tonexmidi/midi.dart';
 import 'package:tonexmidi/midi_knob.dart';
 
 class Reverb extends ConsumerStatefulWidget {
@@ -21,11 +20,11 @@ class Reverb extends ConsumerStatefulWidget {
 class _ReverbState extends ConsumerState<Reverb> {
   @override
   Widget build(BuildContext context) {
-    var values = ref.watch(audioParametersProvider);
+    ref.watch(audioParametersProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 300,
+        height: 175,
         child: Container(
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 174, 219, 255),
@@ -40,13 +39,16 @@ class _ReverbState extends ConsumerState<Reverb> {
                 Row(
                   children: [
                     Switch(
-                        value: values.reverb75 > 0,
+                        value: ref
+                                .read(audioParametersProvider.notifier)
+                                .get("reverb75")
+                                .value >
+                            0,
                         onChanged: (value) {
                           midi.midiCC(75, (value ? 1 : 0) * 127);
-                          ref.read(audioParametersProvider.notifier).state = ref
+                          ref
                               .read(audioParametersProvider.notifier)
-                              .state
-                              .copyWith(reverb75: (value ? 1 : 0) * 127);
+                              .set("reverb75", (value ? 1 : 0) * 127);
                         }),
                     SegmentedButton<int>(
                       style: TextButton.styleFrom(
@@ -79,14 +81,18 @@ class _ReverbState extends ConsumerState<Reverb> {
                           label: Text('Plate'),
                         )
                       ],
-                      selected: {values.revType85},
+                      selected: {
+                        ref
+                            .read(audioParametersProvider.notifier)
+                            .get("revType85")
+                            .value
+                      },
                       onSelectionChanged: (Set<int> newSelection) {
                         setState(() {
                           midi.midiCC(85, newSelection.first);
-                          ref.read(audioParametersProvider.notifier).state = ref
+                          ref
                               .read(audioParametersProvider.notifier)
-                              .state
-                              .copyWith(revType85: newSelection.first);
+                              .set("revType85", newSelection.first);
                         });
                       },
                     )
@@ -104,10 +110,9 @@ class _ReverbState extends ConsumerState<Reverb> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(time76: value);
+                            .set("time76", value);
                       },
                     ),
                     MidiKnob(
@@ -120,10 +125,9 @@ class _ReverbState extends ConsumerState<Reverb> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(color78: value);
+                            .set("color78", value);
                       },
                     ),
                     MidiKnob(
@@ -136,10 +140,9 @@ class _ReverbState extends ConsumerState<Reverb> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(predelay77: value);
+                            .set("predelay77", value);
                       },
                     ),
                     MidiKnob(
@@ -152,10 +155,9 @@ class _ReverbState extends ConsumerState<Reverb> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(reverb79: value);
+                            .set("reverb79", value);
                       },
                     ),
                   ],

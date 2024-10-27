@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tonexmidi/audio_parameter.dart';
 import 'package:tonexmidi/audio_parameters.dart';
 
-var audioParametersProvider =
-    StateProvider<AudioParameters>((ref) => const AudioParameters());
+final audioParametersProvider =
+    NotifierProvider<AudioParameters, List<AudioParameter>>(
+        AudioParameters.new);

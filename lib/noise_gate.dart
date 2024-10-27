@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knob_widget/knob_widget.dart';
 import 'package:tonexmidi/audio_parameters_provider.dart';
 import 'package:tonexmidi/main.dart';
-import 'package:tonexmidi/midi.dart';
 import 'package:tonexmidi/midi_knob.dart';
 
 class NoiseGate extends ConsumerStatefulWidget {
@@ -21,12 +20,12 @@ class NoiseGate extends ConsumerStatefulWidget {
 class _NoiseGateState extends ConsumerState<NoiseGate> {
   @override
   Widget build(BuildContext context) {
-    var values = ref.watch(audioParametersProvider);
+    ref.watch(audioParametersProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 300,
-        width: 350,
+        height: 175,
+        width: 300,
         child: Container(
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 231, 255, 144),
@@ -40,13 +39,16 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                 const Text("Noise Gate"),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Switch(
-                      value: values.noiseGt14 > 0,
+                      value: ref
+                              .read(audioParametersProvider.notifier)
+                              .get("noiseGt14")
+                              .value >
+                          0,
                       onChanged: (value) {
                         midi.midiCC(14, (value ? 1 : 0) * 127);
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(noiseGt14: (value ? 1 : 0) * 127);
+                            .set("noiseGt14", (value ? 1 : 0) * 127);
                       }),
                 ]),
                 Row(
@@ -62,10 +64,9 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(noiseGate15: value);
+                            .set("noiseGate15", value);
                       },
                     ),
                     MidiKnob(
@@ -78,10 +79,9 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(ngRel16: value);
+                            .set("ngRel16", value);
                       },
                     ),
                     MidiKnob(
@@ -94,10 +94,9 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       width: 50,
                       height: 50,
                       valueSetter: (value) {
-                        ref.read(audioParametersProvider.notifier).state = ref
+                        ref
                             .read(audioParametersProvider.notifier)
-                            .state
-                            .copyWith(ngDpth17: value);
+                            .set("ngDpth17", value);
                       },
                     ),
                   ],

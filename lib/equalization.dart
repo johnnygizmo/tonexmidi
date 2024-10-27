@@ -40,22 +40,20 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Gain"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(gain102: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("gain102", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .gain102;
+                                .get("gain102")
+                                .value;
                           },
                         ),
                       ],
                     ),
-                    VerticalDivider(),
+                    const VerticalDivider(),
                     Column(
                       children: [
                         MidiSlider(
@@ -63,17 +61,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Bass"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(bass23: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("bass23", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .bass23;
+                                .get("bass23")
+                                .value;
                           },
                         ),
                         Row(
@@ -89,12 +85,8 @@ class Equalization extends ConsumerWidget {
                               height: 75,
                               valueSetter: (value) {
                                 ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state =
-                                    ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state
-                                        .copyWith(bassFrq24: value);
+                                    .read(audioParametersProvider.notifier)
+                                    .set("bassFrq24", value);
                               },
                             ),
                           ],
@@ -108,17 +100,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Mid"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(mid25: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("mid25", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .mid25;
+                                .get("mid25")
+                                .value;
                           },
                         ),
                         Row(
@@ -134,12 +124,8 @@ class Equalization extends ConsumerWidget {
                               height: 75,
                               valueSetter: (value) {
                                 ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state =
-                                    ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state
-                                        .copyWith(midQ26: value);
+                                    .read(audioParametersProvider.notifier)
+                                    .set("midQ26", value);
                               },
                             ),
                             MidiKnob(
@@ -151,13 +137,8 @@ class Equalization extends ConsumerWidget {
                                 ccMsg: 27,
                                 valueSetter: (value) {
                                   ref
-                                          .read(audioParametersProvider.notifier)
-                                          .state =
-                                      ref
-                                          .read(
-                                              audioParametersProvider.notifier)
-                                          .state
-                                          .copyWith(midFrq27: value);
+                                      .read(audioParametersProvider.notifier)
+                                      .set("midFrq27", value);
                                 },
                                 width: 50,
                                 height: 75)
@@ -172,17 +153,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Treble"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(treble28: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("treble28", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .treble28;
+                                .get("treble28")
+                                .value;
                           },
                         ),
                         Row(
@@ -198,19 +177,15 @@ class Equalization extends ConsumerWidget {
                               height: 75,
                               valueSetter: (value) {
                                 ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state =
-                                    ref
-                                        .read(audioParametersProvider.notifier)
-                                        .state
-                                        .copyWith(trblFrq29: value);
+                                    .read(audioParametersProvider.notifier)
+                                    .set("trblFrq29", value);
                               },
                             ),
                           ],
                         )
                       ],
                     ),
-                    VerticalDivider(),
+                    const VerticalDivider(),
                     Column(
                       children: [
                         MidiSlider(
@@ -218,17 +193,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Depth"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(depth107: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("depth107", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .depth107;
+                                .get("depth107")
+                                .value;
                           },
                         ),
                       ],
@@ -240,17 +213,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Presence"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(presence106: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("presence106", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .presence106;
+                                .get("presence106")
+                                .value;
                           },
                         ),
                       ],
@@ -262,17 +233,15 @@ class Equalization extends ConsumerWidget {
                           midi: midi,
                           label: const Text("Mix"),
                           valueSetter: (value) {
-                            ref.read(audioParametersProvider.notifier).state =
-                                ref
-                                    .read(audioParametersProvider.notifier)
-                                    .state
-                                    .copyWith(mix104: value);
+                            ref
+                                .read(audioParametersProvider.notifier)
+                                .set("mix104", value);
                           },
                           valueGetter: () {
                             return ref
                                 .read(audioParametersProvider.notifier)
-                                .state
-                                .mix104;
+                                .get("mix104")
+                                .value;
                           },
                         ),
                       ],

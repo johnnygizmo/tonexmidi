@@ -1,49 +1,66 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tonexmidi/audio_parameter.dart';
+import 'package:tonexmidi/main.dart';
 
-part 'audio_parameters.freezed.dart';
-part 'audio_parameters.g.dart';
+class AudioParameters extends Notifier<List<AudioParameter>> {
+  @override
+  List<AudioParameter> build() => [
+        const AudioParameter(value: 0, midiMsg: 79, name: "reverb79"),
+        const AudioParameter(value: 0, midiMsg: 19, name: "compressor19"),
+        const AudioParameter(value: 0, midiMsg: 15, name: "noiseGate15"),
+        const AudioParameter(value: 64, midiMsg: 106, name: "presence106"),
+        const AudioParameter(value: 64, midiMsg: 107, name: "depth107"),
+        const AudioParameter(value: 0, midiMsg: 103, name: "modelVol103"),
+        const AudioParameter(value: 0, midiMsg: 14, name: "noiseGt14"),
+        const AudioParameter(value: 0, midiMsg: 16, name: "ngRel16"),
+        const AudioParameter(value: 64, midiMsg: 17, name: "ngDpth17"),
+        const AudioParameter(value: 0, midiMsg: 18, name: "comp18"),
+        const AudioParameter(value: 80, midiMsg: 20, name: "cmpGain20"),
+        const AudioParameter(value: 20, midiMsg: 21, name: "cmpAtk21"),
+        const AudioParameter(value: 127, midiMsg: 22, name: "cmpPatc22"),
+        const AudioParameter(value: 64, midiMsg: 23, name: "bass23"),
+        const AudioParameter(value: 70, midiMsg: 24, name: "bassFrq24"),
+        const AudioParameter(value: 64, midiMsg: 25, name: "mid25"),
+        const AudioParameter(value: 64, midiMsg: 26, name: "midQ26"),
+        const AudioParameter(value: 64, midiMsg: 27, name: "midFrq27"),
+        const AudioParameter(value: 64, midiMsg: 28, name: "treble28"),
+        const AudioParameter(value: 64, midiMsg: 29, name: "trblFrq29"),
+        const AudioParameter(value: 0, midiMsg: 30, name: "eqPatch30"),
+        const AudioParameter(value: 127, midiMsg: 104, name: "mix104"),
+        const AudioParameter(value: 0, midiMsg: 75, name: "reverb75"),
+        const AudioParameter(value: 0, midiMsg: 85, name: "revType85"),
+        const AudioParameter(value: 64, midiMsg: 76, name: "time76"),
+        const AudioParameter(value: 0, midiMsg: 77, name: "predelay77"),
+        const AudioParameter(value: 64, midiMsg: 78, name: "color78"),
+        const AudioParameter(value: 0, midiMsg: 108, name: "reso108"),
+        const AudioParameter(value: 0, midiMsg: 109, name: "mic1_109"),
+        const AudioParameter(value: 0, midiMsg: 110, name: "mic1X110"),
+        const AudioParameter(value: 0, midiMsg: 111, name: "mic1Z111"),
+        const AudioParameter(value: 0, midiMsg: 112, name: "mic2_112"),
+        const AudioParameter(value: 0, midiMsg: 113, name: "mic2X113"),
+        const AudioParameter(value: 0, midiMsg: 114, name: "mic2Z114"),
+        const AudioParameter(value: 0, midiMsg: 115, name: "micsMix115"),
+        const AudioParameter(value: 64, midiMsg: 102, name: "gain102"),
+      ];
 
-@freezed
-class AudioParameters with _$AudioParameters {
-  const factory AudioParameters({
-    @Default(0) int reverb79,
-    @Default(0) int compressor19,
-    @Default(0) int noiseGate15,
-    @Default(64) int presence106,
-    @Default(64) int depth107,
-    @Default(0) int modelVol103,
-    @Default(0) int noiseGt14,
-    @Default(0) int ngRel16,
-    @Default(64) int ngDpth17,
-    @Default(0) int comp18,
-    @Default(80) int cmpGain20,
-    @Default(20) int cmpAtk21,
-    @Default(127) int cmpPatc22,
-    @Default(64) int bass23,
-    @Default(70) int bassFrq24,
-    @Default(64) int mid25,
-    @Default(64) int midQ26,
-    @Default(64) int midFrq27,
-    @Default(64) int treble28,
-    @Default(64) int trblFrq29,
-    @Default(0) int eqPatch30,
-    @Default(127) int mix104,
-    @Default(0) int reverb75,
-    @Default(0) int revType85,
-    @Default(64) int time76,
-    @Default(0) int predelay77,
-    @Default(64) int color78,
-    @Default(0) int reso108,
-    @Default(0) int mic1_109,
-    @Default(0) int mic1X110,
-    @Default(0) int mic1Z111,
-    @Default(0) int mic2_112,
-    @Default(0) int mic2X113,
-    @Default(0) int mic2Z114,
-    @Default(0) int micsMix115,
-    @Default(64) int gain102,
-  }) = _AudioParameters;
+  void set(String name, int newValue) {
+    state = [
+      for (final ap in state)
+        if (ap.name == name)
+          AudioParameter(value: newValue, midiMsg: ap.midiMsg, name: ap.name)
+        else
+          ap
+    ];
+  }
 
-  factory AudioParameters.fromJson(Map<String, dynamic> json) =>
-      _$AudioParametersFromJson(json);
+  AudioParameter get(String name) {
+    return state.where((ap) => ap.name == name).first;
+  }
+
+  void sync() async {
+    for (final ap in state) {
+      midi.midiCC(ap.midiMsg, ap.value);
+      await Future.delayed(Duration(milliseconds: 5));
+    }
+  }
 }

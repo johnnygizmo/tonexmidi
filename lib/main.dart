@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:knob_widget/knob_widget.dart';
+import 'package:tonexmidi/audio_parameters_provider.dart';
 import 'package:tonexmidi/compressor.dart';
 import 'package:tonexmidi/equalization.dart';
 import 'package:tonexmidi/midi.dart';
-import 'package:tonexmidi/midi_knob.dart';
-import 'package:tonexmidi/midi_slider.dart';
 import 'package:tonexmidi/noise_gate.dart';
 import 'package:tonexmidi/reverb.dart';
 
@@ -49,20 +48,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  late KnobController _controller;
-  late double _knobValue;
-
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   void initState() {
     // TODO: implement initState
@@ -83,6 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                ref.read(audioParametersProvider.notifier).sync();
+              },
+              icon: Icon(Icons.sync))
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -179,14 +181,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   Row(
                     children: [
                       Equalization(style: style),
+                      Column(
+                        children: [
+                          NoiseGate(knobStyle: style),
+                          Compressor(
+                            knobStyle: style,
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   Row(
                     children: [
-                      NoiseGate(knobStyle: style),
-                      Compressor(
-                        knobStyle: style,
-                      ),
                       Reverb(
                         knobStyle: style,
                       )

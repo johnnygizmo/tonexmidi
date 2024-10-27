@@ -38,7 +38,7 @@ class _MidiSliderState extends ConsumerState<MidiSlider> {
                 min: 0.0,
                 max: 10.0,
                 rtl: true,
-                step: FlutterSliderStep(step: 0.1),
+                step: const FlutterSliderStep(step: 0.1),
                 axis: Axis.vertical,
                 onDragging: (handlerIndex, lowerValue, upperValue) {
                   widget.valueSetter(((lowerValue / 10.0) * 127).toInt());
