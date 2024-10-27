@@ -24,7 +24,7 @@ class _CompressorState extends ConsumerState<Compressor> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 175,
+        height: 200,
         width: 300,
         child: Container(
           decoration: BoxDecoration(
@@ -38,6 +38,8 @@ class _CompressorState extends ConsumerState<Compressor> {
               children: [
                 const Text("Compressor"),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Switch(
                         value: ref
@@ -86,6 +88,8 @@ class _CompressorState extends ConsumerState<Compressor> {
                   ],
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     MidiKnob(
                       label: const Text(
@@ -95,7 +99,7 @@ class _CompressorState extends ConsumerState<Compressor> {
                       style: widget.knobStyle,
                       ccMsg: 19,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -110,7 +114,7 @@ class _CompressorState extends ConsumerState<Compressor> {
                       style: widget.knobStyle,
                       ccMsg: 20,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -125,7 +129,7 @@ class _CompressorState extends ConsumerState<Compressor> {
                       style: widget.knobStyle,
                       ccMsg: 21,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)

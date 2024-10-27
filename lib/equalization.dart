@@ -19,7 +19,7 @@ class Equalization extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 370,
+        height: 420,
         width: 550,
         child: Container(
           decoration: BoxDecoration(

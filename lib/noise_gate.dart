@@ -24,7 +24,7 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 175,
+        height: 200,
         width: 300,
         child: Container(
           decoration: BoxDecoration(
@@ -62,7 +62,7 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       style: widget.knobStyle,
                       ccMsg: 15,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -77,7 +77,7 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       style: widget.knobStyle,
                       ccMsg: 16,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -92,7 +92,7 @@ class _NoiseGateState extends ConsumerState<NoiseGate> {
                       style: widget.knobStyle,
                       ccMsg: 17,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)

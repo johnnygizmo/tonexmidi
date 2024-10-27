@@ -24,7 +24,7 @@ class _ReverbState extends ConsumerState<Reverb> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 175,
+        height: 200,
         child: Container(
           decoration: BoxDecoration(
               color: const Color.fromARGB(255, 174, 219, 255),
@@ -108,7 +108,7 @@ class _ReverbState extends ConsumerState<Reverb> {
                       style: widget.knobStyle,
                       ccMsg: 76,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -123,7 +123,7 @@ class _ReverbState extends ConsumerState<Reverb> {
                       style: widget.knobStyle,
                       ccMsg: 78,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -138,7 +138,7 @@ class _ReverbState extends ConsumerState<Reverb> {
                       style: widget.knobStyle,
                       ccMsg: 77,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
@@ -153,7 +153,7 @@ class _ReverbState extends ConsumerState<Reverb> {
                       style: widget.knobStyle,
                       ccMsg: 79,
                       width: 50,
-                      height: 50,
+                      height: 75,
                       valueSetter: (value) {
                         ref
                             .read(audioParametersProvider.notifier)
